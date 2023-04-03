@@ -1,0 +1,190 @@
+<div class="pagina-alumnos">
+<div class="card mb-3 shadow-lg bg-white rounded">
+  <div class="card-body">
+    <h1 class="card-title">Alta de alumnos</h1>
+    <form [formGroup]="alumnosForms" (ngSubmit)="OnSubmit()">
+      <div class="row g-3">
+        <div class="col mb-3">
+          <input
+            [class.is-invalid]="nombreControl.invalid && nombreControl.touched"
+            formControlName="nombre"
+            type="text"
+            class="form-control "
+            placeholder="Nombre"
+            aria-label="First name"
+          />
+          <app-form-error-helper
+            *ngIf="nombreControl.invalid && nombreControl.touched"
+            [formsErrors]="nombreControl.errors"
+          ></app-form-error-helper>
+          <!-- <div *ngIf="nombreControl.hasError('required')" class="invalid-feedback"> Debe ingresar un nombre</div>
+          <div *ngIf="nombreControl.hasError('minlength')" class="invalid-feedback"> Nombre corto</div> -->
+        </div>
+
+        <div class="col mb-3">
+          <input
+            [class.is-invalid]="apellidoControl.invalid && apellidoControl.touched"
+            formControlName="apellido"
+            type="text"
+            class="form-control"
+            placeholder="Apellido"
+            aria-label="Last name"
+          />
+          <app-form-error-helper
+            *ngIf="apellidoControl.invalid && apellidoControl.touched"
+            [formsErrors]="apellidoControl.errors"
+          ></app-form-error-helper>          
+        </div>
+      </div>
+      <div class="row g-3 ">
+        <div class="col mb-3 ">
+          <input
+            [class.is-invalid]="emailControl.invalid && emailControl.touched"
+            formControlName="email"
+            type="text"
+            class="form-control "
+            placeholder="E-mail"
+            aria-label="email"
+          />
+          <app-form-error-helper
+            *ngIf="emailControl.invalid && emailControl.touched"
+            [formsErrors]="emailControl.errors"
+          ></app-form-error-helper>          
+        </div>
+        <div class="col mb-3">
+          <input
+            [class.is-invalid]="fechaNacimientoControl.invalid && fechaNacimientoControl.touched"
+            formControlName="fechaNacimiento"
+            type="text"
+            class="form-control"
+            placeholder="Fecha de nacimiento"
+            aria-label="Last name"
+          />
+          <app-form-error-helper
+            *ngIf="fechaNacimientoControl.invalid && fechaNacimientoControl.touched"
+            [formsErrors]="fechaNacimientoControl.errors"
+          ></app-form-error-helper>            
+        </div>
+      </div>
+      <div class="row g-3">
+        <div class="col mb-3">
+          <input
+            [class.is-invalid]="numeroDocumentoControl.invalid && numeroDocumentoControl.touched"
+            formControlName="numeroDocumento"
+            type="text"
+            class="form-control"
+            placeholder="Número de documento"
+            aria-label="numeroDocumento"
+          />
+          <app-form-error-helper
+            *ngIf="numeroDocumentoControl.invalid && numeroDocumentoControl.touched"
+            [formsErrors]="numeroDocumentoControl.errors"
+          ></app-form-error-helper>            
+        </div>
+        <div class="col mb-3">
+          <input
+            formControlName="curso"
+            type="text"
+            class="form-control"
+            placeholder="Curso"
+            aria-label="curso"
+          />
+        </div>
+      </div>
+      <!-- <form>
+      <div class="form-row">
+        <div class="form-group col-md-2">
+          <label for="inputEmail4">Email</label>
+          <input
+            type="email"
+            class="form-control"
+            id="inputEmail4"
+            placeholder="Email"
+          />
+        </div>
+        <div class="form-group col-md-2">
+          <label for="inputPassword4">Password</label>
+          <input
+            type="password"
+            class="form-control"
+            id="inputPassword4"
+            placeholder="Password"
+          />
+        </div>
+      </div>
+      <div class="form-group col-md-5">
+        <label for="inputAddress">Address</label>
+        <input
+          type="text"
+          class="form-control"
+          id="inputAddress"
+          placeholder="1234 Main St"
+        />
+      </div>
+      <div class="form-group">
+        <label for="inputAddress2">Address 2</label>
+        <input
+          type="text"
+          class="form-control"
+          id="inputAddress2"
+          placeholder="Apartment, studio, or floor"
+        />
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="inputCity">City</label>
+          <input type="text" class="form-control" id="inputCity" />
+        </div>
+        <div class="form-group col-md-4">
+          <label for="inputState">State</label>
+          <select id="inputState" class="form-control">
+            <option selected>Choose...</option>
+            <option>...</option>
+          </select>
+        </div>
+        <div class="form-group col-md-2">
+          <label for="inputZip">Zip</label>
+          <input type="text" class="form-control" id="inputZip" />
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="gridCheck" />
+          <label class="form-check-label" for="gridCheck"> Check me out </label>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary">Sign in</button>
+    </form> -->
+      <button type="submit" class="btn btn-primary">Aceptar</button>
+    </form>
+  </div>
+</div>
+
+<div class="card mb-3 shadow-lg bg-white rounded">
+  <div class="card-body">
+    <h1 class="card-title">Listado de alumnos</h1>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Nombre</th>
+          <th scope="col">Apellido</th>
+          <th scope="col">E-mail</th>
+          <th scope="col">Curso</th>
+        </tr>
+      </thead>
+      <tbody *ngFor="let alumno of alumnos; index as i">
+        <!-- {{alumnos[0].nombre |json}} -->
+
+        <tr>
+          <th scope="row">{{ i + 1 }}</th>
+          <td >{{ alumnos[i].nombre }}</td>
+          <td >{{ alumnos[i].apellido }}</td>
+          <td >{{ alumnos[i].email }}</td>
+          <td >{{ alumnos[i].curso }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+</div>
